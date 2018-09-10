@@ -20,12 +20,18 @@
     "clean:build": "rm -rf dist",
     "coverage": "jest --coverage",
     "format": "prettier --write \"{webpack,src,server}/**/*.{js,ts,tsx}\" ",
+    "precommit": "lint-staged",
     "typecheck": "tsc",
     "lint": "tslint -c tslint.json --project tsconfig.json -t codeFrame",
     "prepublishOnly": "yarn build",
     "start": "babel-node --extensions '.ts,.tsx' index.ts",
     "test": "jest",
     "test:watch": "jest -o --watch"
+  },
+  "lint-staged": {
+    "*.{js, ts, tsx}": [
+      "prettier --write"
+    ]
   },
   "jest": {
     "setupFiles": [
@@ -75,7 +81,9 @@
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "friendly-errors-webpack-plugin": "1.6.1",
+    "husky": "0.13.4",
     "jest": "21.3.0-beta.9",
+    "lint-staged": "3.6.1",
     "nodemon": "^1.12.1",
     "prettier": "^1.7.4",
     "react-hot-loader": "^4.3.6",
