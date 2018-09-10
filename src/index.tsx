@@ -15,7 +15,8 @@ type Foo = {
 
 const props: Foo = {
   name: 'hi',
-  foo: () => 'hi'
+  foo: () => 'hi',
+  bar: () => 2
 }
 
 ReactDOM.render(<App {...props} />, document.getElementById('app'))

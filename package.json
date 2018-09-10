@@ -29,7 +29,7 @@
     "test:watch": "jest -o --watch"
   },
   "lint-staged": {
-    "*.{js, ts, tsx}": [
+    "*.{js,ts,tsx}": [
       "prettier --write"
     ]
   },
