@@ -12,6 +12,7 @@ app.set('port', process.env.PORT || 3004)
 if (process.env.NODE_ENV === 'development') {
   app.use(WebpackServer)
 }
+
 app.use(Root)
 
 export default app

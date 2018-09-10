@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const constants = require('./constants')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const nodeEnv = 'development'
 
@@ -24,7 +25,8 @@ const plugins = [
   new webpack.DllReferencePlugin({
     context: '.',
     manifest: require(`${constants.BUILD_DIR}/vendor-manifest.json`) // eslint-disable-line import/no-dynamic-require
-  })
+  }),
+  new FriendlyErrorsWebpackPlugin()
 ]
 
 const babelLoader = {

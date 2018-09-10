@@ -3,15 +3,14 @@ import webpackDev from 'webpack-dev-middleware'
 import webpackHot from 'webpack-hot-middleware'
 
 import express from 'express'
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
 
 import webpackDevConfig from '../webpack.dev.config'
 const webpackConfig = webpackDevConfig as Configuration
 
 const router = express.Router()
-console.log(webpackDevConfig)
+
 const compiler = webpack(webpackConfig)
-compiler.apply(new FriendlyErrorsWebpackPlugin())
+
 router.use(
   webpackDev(compiler, {
     headers: { 'Access-Control-Allow-Origin': '*' },
