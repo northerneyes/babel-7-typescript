@@ -1,5 +1,4 @@
 {
-  "tslint.autoFixOnSave": false,
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -15,8 +14,6 @@
     ".jest/*": true
   },
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
   "javascript.format.enable": false,
-  "editor.formatOnSave": true,
-  "prettier.tslintIntegration": true
+  "editor.formatOnSave": true
 }

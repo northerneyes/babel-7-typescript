@@ -1,13 +1,18 @@
 {
-  "extends": ["tslint-config-standard", "tslint-react"],
+  "extends": [
+    "tslint-config-standard",
+    "tslint-config-prettier",
+    "tslint-react",
+    "typestrict"
+  ],
   "rules": {
     "no-any": true,
     "jsx-no-multiline-js": false,
     "no-namespace": true,
+    "no-unused-variable": false,
     "deprecation": {
       "severity": "warning"
-    },
-    "quotemark": [true, "single", "jsx-single"]
+    }
   },
   "linterOptions": {
     "exclude": ["dist/*.js", "**/node_modules/*", "**/*.js"]

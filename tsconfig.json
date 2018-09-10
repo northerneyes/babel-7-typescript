@@ -20,7 +20,13 @@
 
     "pretty": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "plugins": [
+      {
+        "name": "tslint-language-service",
+        "configFile": "./tslint.json"
+      }
+    ]
   },
   "exclude": ["node_modules", "**/node_modules/*"]
 }

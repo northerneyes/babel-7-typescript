@@ -6,7 +6,7 @@ interface Props {
 }
 
 class App extends Component<Props> {
-  render () {
+  render() {
     return <div>{this.props.name} from tsx!</div>
   }
 }
