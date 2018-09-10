@@ -4,29 +4,11 @@
       "@babel/env",
       {
         "targets": {
-          "browsers": [
-            "last 2 versions"
-          ]
+          "node": "current"
         }
       }
     ],
     "@babel/react",
     "@babel/typescript"
-  ],
-  "plugins": [
-    [
-      "module-resolver",
-      {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ],
-        "root": [
-          "./src"
-        ]
-      }
-    ]
   ]
 }

@@ -1,6 +1,15 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "rootDir": "./",
@@ -8,8 +17,7 @@
     "module": "es2015",
     "moduleResolution": "node",
     "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+
     "pretty": true,
     "skipLibCheck": true,
     "sourceMap": true

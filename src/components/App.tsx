@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
+import { hot } from 'react-hot-loader'
 
 interface Props {
   name: string
 }
 
-export class App extends Component<Props> {
+class App extends Component<Props> {
   render () {
-    return (
-      <div>
-        hi {this.props.name} from tsx!
-      </div>
-    )
+    return <div>hi {this.props.name} from tsx!</div>
   }
 }
+
+export default hot(module)(App)
