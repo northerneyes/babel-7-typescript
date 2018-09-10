@@ -30,7 +30,9 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "prettier --write"
+      "prettier --write",
+      "tslint -c tslint.json --project tsconfig.json -t codeFrame",
+      "git add"
     ]
   },
   "jest": {
