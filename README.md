@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/damassi/babel-7-typescript-example.svg?branch=master)](https://travis-ci.org/damassi/babel-7-typescript-example)
-
 # TypeScript + Babel 7
 
 Example TypeScript project built on top of new Babel 7 features. Includes React 16, Jest and Enzyme (for tests). Since the TypeScript compiler is no longer required to compile sources you can keep your existing Babel pipeline and instead rely on editor-based type-checking or `tsc`.
@@ -13,8 +11,6 @@ yarn start
 yarn test:watch
 yarn typecheck
 ```
-
-**For a more complete example that uses Webpack see [this fork](https://github.com/emakina-cee-oss/babel-7-typescript-example/tree/webpack-support) -- thanks @flobacher.**
 
 If using VSCode, make sure to install the recommended extensions.
 
