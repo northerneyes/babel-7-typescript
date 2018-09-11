@@ -10,7 +10,7 @@ type OutterProps = {
 
 type StateProps = {
   message: string
-  setMessage: (message: string) => void
+  setMessage: (state: string) => string
 }
 
 type HandlerProps = {
@@ -24,19 +24,23 @@ export const Component = (props: Props) => (
     {props.name} But hrm doesn't work because of using recompact
     <br />
     <div>
-      <button onClick={props.handleClick}>Click me</button>
+      <button onClick={props.handleClick}>Click me !</button>
     </div>
     <div>{props.message}</div>
   </div>
 )
 
-export const RecompactExample = compose<Props, OutterProps>(
-  withState<
-    OutterProps,
-    StateProps['message'],
-    keyof StateProps,
-    keyof StateProps
-  >('message', 'setMessage', ''),
+export const RecompactExample = compose<
+  OutterProps,
+  OutterProps & StateProps,
+  Props,
+  Props
+>(
+  withState<OutterProps, string, 'message', 'setMessage'>(
+    'message',
+    'setMessage',
+    ''
+  ),
   withHandlers<OutterProps & StateProps, HandlerProps>({
     handleClick: props => _ => {
       props.setMessage(props.message ? '' : "You've clicked me!")
