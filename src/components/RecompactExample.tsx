@@ -10,7 +10,7 @@ type OutterProps = {
 
 type StateProps = {
   message: string
-  setMessage: (state: string) => string
+  setMessage: (message: string) => string
 }
 
 type HandlerProps = {
@@ -46,7 +46,7 @@ export const RecompactExample = compose<
       props.setMessage(props.message ? '' : "You've clicked me!")
     }
   }),
-  lifecycle<OutterProps & StateProps & HandlerProps, {}>({
+  lifecycle<Props, {}>({
     componentDidMount() {
       console.log(`mounted ${this.props.name}`)
     }

@@ -4,7 +4,8 @@ declare module 'recompose' {
   import {
     stateProps,
     ComponentEnhancer,
-    InferableComponentEnhancerWithProps
+    InferableComponentEnhancerWithProps,
+    ReactLifeCycleFunctions
   } from 'recompose'
 
   export function withState<
@@ -23,10 +24,10 @@ declare module 'recompose' {
 
   export function lifecycle<TProps, TState, TInstance = {}>(
     spec: ReactLifeCycleFunctions<TProps, TState, TInstance> & TInstance
-  ): InferableComponentEnhancerWithProps<TProps>
+  ): InferableComponentEnhancerWithProps<TProps, TProps>
 
   export function compose<OProps, I1, I2, IProps>(
-    f1: InferableComponentEnhancerWithProps<I1, OutterProps>,
+    f1: InferableComponentEnhancerWithProps<I1, OProps>,
     f2: InferableComponentEnhancerWithProps<I2, I1>,
     f4: InferableComponentEnhancerWithProps<IProps, I2>
   ): ComponentEnhancer<IProps, OProps>
