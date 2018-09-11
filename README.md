@@ -1,46 +1,16 @@
-# TypeScript + Babel 7
+# Typescript + Babel 7 with webpack hmr and maximum type safety
 
-Example TypeScript project built on top of new Babel 7 features. Includes React 16, Jest and Enzyme (for tests). Since the TypeScript compiler is no longer required to compile sources you can keep your existing Babel pipeline and instead rely on editor-based type-checking or `tsc`.
+Example TypeScript project built on top of new Babel 7 features. Includes React 16, webpack + HMR + typescript server, maximum type safety both by compiler and tslint, prettier + git hook. Since the TypeScript compiler is no longer required to compile sources you can keep your existing Babel pipeline and instead rely on editor-based type-checking or `tsc`.
 
 ## Installation
 
 ```sh
-git clone https://github.com/damassi/babel-7-typescript-example && cd babel-7-typescript-example
+git clone https://github.com/northerneyes/babel-7-typescript.git && cd babel-7-typescript
 yarn install
-yarn start
-yarn test:watch
+yarn build:dll
+yarn dev
 yarn typecheck
+yarn lint
 ```
 
-If using VSCode, make sure to install the recommended extensions.
-
-## Example
-
-```jsx
-// App.tsx
-import React, { Component } from 'react'
-
-interface Props {
-  name: string
-}
-
-export const App extends Component<Props> {
-  render () {
-    return (
-      <div>
-        Hi {this.props.name} from .tsx!
-      </div>
-    )
-  }
-}
-
-// index.ts
-import ReactDOM from 'react-dom/server'
-import { App } from './components/App'
-
-console.log(ReactDOM.renderToString(<App name='leif' />))
-```
-
-```sh
-yarn build (or babel src --out-dir dist --extensions '.ts,.tsx')
-```
+If you are using VSCode, do not use default tslint extension [vscode-tslint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint) and disable it, this project uses [tslint-language-service](https://github.com/angelozerr/tslint-language-service/blob/master/README.md)
