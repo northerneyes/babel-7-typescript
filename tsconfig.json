@@ -24,6 +24,7 @@
     "plugins": [
       {
         "name": "tslint-language-service",
+        "ignoreDefinitionFiles": true,
         "configFile": "./tslint.json"
       }
     ],

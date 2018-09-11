@@ -18,6 +18,6 @@
     }
   },
   "linterOptions": {
-    "exclude": ["dist/*.js", "@types", "**/node_modules/*", "**/*.js"]
+    "exclude": ["dist/*.js", "**/node_modules/*", "**/*.js"]
   }
 }
