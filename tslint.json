@@ -12,9 +12,12 @@
     "no-unused-variable": false,
     "deprecation": {
       "severity": "warning"
+    },
+    "no-invalid-this": {
+      "severity": "warning"
     }
   },
   "linterOptions": {
-    "exclude": ["dist/*.js", "**/node_modules/*", "**/*.js"]
+    "exclude": ["dist/*.js", "@types", "**/node_modules/*", "**/*.js"]
   }
 }

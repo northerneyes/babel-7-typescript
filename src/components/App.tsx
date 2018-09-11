@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
+import { RecompactExample } from './RecompactExample'
+import Example from './Example'
 
 interface Props {
   name: string
@@ -7,7 +9,12 @@ interface Props {
 
 class App extends Component<Props> {
   render() {
-    return <div>{this.props.name} from tsx!</div>
+    return (
+      <div>
+        <Example />
+        <RecompactExample name="hello world" />
+      </div>
+    )
   }
 }
 

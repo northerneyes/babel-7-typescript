@@ -26,7 +26,8 @@
         "name": "tslint-language-service",
         "configFile": "./tslint.json"
       }
-    ]
+    ],
+    "typeRoots": ["./node_modules/@types", "./@types"]
   },
   "exclude": ["node_modules", "**/node_modules/*"]
 }
