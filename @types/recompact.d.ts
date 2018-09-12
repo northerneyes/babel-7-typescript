@@ -5,9 +5,9 @@ declare module 'recompose' {
     stateProps,
     ComponentEnhancer,
     InferableComponentEnhancerWithProps,
-    ValidationMap,
     ReactLifeCycleFunctions
   } from 'recompose'
+  import { ValidationMap } from 'react'
 
   export function withState<
     TOutter,
