@@ -34,6 +34,10 @@ export const Component = (props: Props) => {
   )
 }
 
+type Context = {
+  intl: InjectedIntl
+}
+
 export const RecompactExample = compose<
   OutterProps,
   OutterProps & StateProps,
