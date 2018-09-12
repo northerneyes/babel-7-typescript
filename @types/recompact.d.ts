@@ -53,13 +53,17 @@ declare module 'recompact' {
     contextTypes: ValidationMap<TContext>
   ): InferableComponentEnhancerWithProps<TOutter & TContext, TOutter>
 
-  export function defaultProps<TOutter, TDefault>(
+  export function defaultProps<TOutter, TDefault = {}>(
     props: TDefault
   ): InferableComponentEnhancerWithProps<TOutter & Required<TDefault>, TOutter>
 
-  export function withProps<TOutter, TInner>(
-    createProps: TInner | mapper<TOutter, TInner>
-  ): InferableComponentEnhancerWithProps<TInner & TOutter, TOutter>
+  export function withProps<TOutter, TProps>(
+    createProps: TProps | mapper<TOutter, TProps>
+  ): InferableComponentEnhancerWithProps<TProps & TOutter, TOutter>
+
+  export function onlyUpdateForKeys<T>(
+    propKeys: Array<keyof T>
+  ): InferableComponentEnhancerWithProps<T, T>
 }
 
 declare module 'recompact/withState' {
@@ -95,4 +99,14 @@ declare module 'recompact/defaultProps' {
 declare module 'recompact/withProps' {
   import { withProps } from 'recompact'
   export default withProps
+}
+
+declare module 'recompact/onlyUpdateForKeys' {
+  import { onlyUpdateForKeys } from 'recompact'
+  export default onlyUpdateForKeys
+}
+
+declare module 'recompact/pure' {
+  import { pure } from 'recompose'
+  export default pure
 }
