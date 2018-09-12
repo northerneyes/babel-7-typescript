@@ -3,12 +3,14 @@ import compose from 'recompact/compose'
 import withState from 'recompact/withState'
 import withHandlers from 'recompact/withHandlers'
 import lifecycle from 'recompact/lifecycle'
-import getContext from 'recompact/getContext'
-import withProps from 'recompact/withProps'
-import { InjectedIntl } from 'react-intl'
+import defaultProps from 'recompact/defaultProps'
 
 type OutterProps = {
   name: string
+}
+
+type DefaultProps = {
+  defaultMessage?: string
 }
 
 type StateProps = {
@@ -20,7 +22,7 @@ type HandlerProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-type Props = StateProps & HandlerProps & OutterProps & Context & WithProps
+type Props = StateProps & HandlerProps & OutterProps & Required<DefaultProps>
 
 export const Component = (props: Props) => {
   return (
@@ -31,45 +33,37 @@ export const Component = (props: Props) => {
         <button onClick={props.handleClick}>Click me !</button>
       </div>
       <div>{props.message}</div>
+      <div>{props.defaultMessage}</div>
     </div>
   )
 }
 
-type Context = {
-  intl: InjectedIntl
-}
-
-type WithProps = {
-  defaultMessage: string
-}
-
 export const RecompactExample = compose<
-  OutterProps,
-  OutterProps & WithProps,
-  OutterProps & StateProps & WithProps,
-  OutterProps & StateProps & Context & WithProps,
+  OutterProps & DefaultProps,
+  OutterProps & Required<DefaultProps>,
+  OutterProps & StateProps & Required<DefaultProps>,
   Props,
   Props
 >(
-  withProps<OutterProps, WithProps>({
-    defaultMessage: 'something'
+  defaultProps<OutterProps, DefaultProps>({
+    defaultMessage: 'something 2'
   }),
-  withState<OutterProps & WithProps, string, 'message', 'setMessage'>(
+  withState<
+    OutterProps & Required<DefaultProps>,
+    string,
     'message',
-    'setMessage',
-    ''
-  ),
-  getContext<OutterProps & StateProps & WithProps, Context>({
-    intl: () => null
-  }),
-  withHandlers<OutterProps & StateProps & Context & WithProps, HandlerProps>({
-    handleClick: props => _ => {
-      props.setMessage(props.message ? '' : "You've clicked me!")
+    'setMessage'
+  >('message', 'setMessage', ''),
+  withHandlers<OutterProps & StateProps & Required<DefaultProps>, HandlerProps>(
+    {
+      handleClick: props => _ => {
+        props.setMessage(props.message ? '' : "You've clicked me!")
+      }
     }
-  }),
+  ),
   lifecycle<Props, {}>({
     componentDidMount() {
-      console.log(`mounted ${this.props.name}`)
+      console.log(`mounted ${this.props.defaultMessage}`)
     }
   })
 )(Component)

@@ -53,9 +53,9 @@ declare module 'recompact' {
     contextTypes: ValidationMap<TContext>
   ): InferableComponentEnhancerWithProps<TOutter & TContext, TOutter>
 
-  export function defaultProps<TOutter, TDefaultProps>(
-    contextTypes: ValidationMap<TDefaultProps>
-  ): InferableComponentEnhancerWithProps<TOutter & TDefaultProps, TOutter>
+  export function defaultProps<TOutter, TDefault>(
+    props: TDefault
+  ): InferableComponentEnhancerWithProps<TOutter & Required<TDefault>, TOutter>
 
   export function withProps<TOutter, TInner>(
     createProps: TInner | mapper<TOutter, TInner>
