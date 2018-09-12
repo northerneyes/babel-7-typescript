@@ -4,6 +4,7 @@ import withState from 'recompact/withState'
 import withHandlers from 'recompact/withHandlers'
 import lifecycle from 'recompact/lifecycle'
 import getContext from 'recompact/getContext'
+import withProps from 'recompact/withProps'
 import { InjectedIntl } from 'react-intl'
 
 type OutterProps = {
@@ -19,7 +20,7 @@ type HandlerProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-type Props = StateProps & HandlerProps & OutterProps & Context
+type Props = StateProps & HandlerProps & OutterProps & Context & WithProps
 
 export const Component = (props: Props) => {
   return (
@@ -38,22 +39,30 @@ type Context = {
   intl: InjectedIntl
 }
 
+type WithProps = {
+  defaultMessage: string
+}
+
 export const RecompactExample = compose<
   OutterProps,
-  OutterProps & StateProps,
-  OutterProps & StateProps & Context,
+  OutterProps & WithProps,
+  OutterProps & StateProps & WithProps,
+  OutterProps & StateProps & Context & WithProps,
   Props,
   Props
 >(
-  withState<OutterProps, string, 'message', 'setMessage'>(
+  withProps<OutterProps, WithProps>({
+    defaultMessage: 'something'
+  }),
+  withState<OutterProps & WithProps, string, 'message', 'setMessage'>(
     'message',
     'setMessage',
     ''
   ),
-  getContext<OutterProps & StateProps, Context>({
+  getContext<OutterProps & StateProps & WithProps, Context>({
     intl: () => null
   }),
-  withHandlers<OutterProps & StateProps & Context, HandlerProps>({
+  withHandlers<OutterProps & StateProps & Context & WithProps, HandlerProps>({
     handleClick: props => _ => {
       props.setMessage(props.message ? '' : "You've clicked me!")
     }
