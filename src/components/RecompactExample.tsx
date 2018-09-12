@@ -15,9 +15,6 @@ type DefaultProps = {
   defaultMessage?: string
 }
 
-// type PureType = InferableComponentEnhancerWithProps<Props, Props>
-// const pureFunc: PureType = pure
-
 type Props = StateProps & HandlerProps & InputProps & Required<DefaultProps>
 
 export const Component = (props: Props) => {
