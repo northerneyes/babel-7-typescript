@@ -31,7 +31,6 @@
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "prettier --write",
-      "tslint -c tslint.json --project tsconfig.json -t codeFrame",
       "git add"
     ]
   },
@@ -72,6 +71,7 @@
     "@types/jest": "^21.1.8",
     "@types/react": "16.4.2",
     "@types/react-dom": "^16.0.7",
+    "@types/react-intl": "^2.3.10",
     "@types/recompose": "^0.26.5",
     "@types/webpack": "^4.4.11",
     "@types/webpack-dev-middleware": "^2.0.2",
@@ -110,6 +110,7 @@
     "express": "^4.16.3",
     "react": "16.4.2",
     "react-dom": "16.4.2",
+    "react-intl": "^2.4.0",
     "recompact": "^3.4.0"
   }
 }

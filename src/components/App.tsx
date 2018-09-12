@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
 import { RecompactExample } from './RecompactExample'
 import Example from './Example'
+import { IntlProvider } from 'react-intl'
 
 interface Props {
   name: string
@@ -10,10 +11,12 @@ interface Props {
 class App extends Component<Props> {
   render() {
     return (
-      <div>
-        <Example />
-        <RecompactExample name="hello world" />
-      </div>
+      <IntlProvider locale="en">
+        <>
+          <Example />
+          <RecompactExample name="hello world" />
+        </>
+      </IntlProvider>
     )
   }
 }

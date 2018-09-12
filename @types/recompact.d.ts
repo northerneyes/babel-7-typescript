@@ -5,6 +5,7 @@ declare module 'recompose' {
     stateProps,
     ComponentEnhancer,
     InferableComponentEnhancerWithProps,
+    ValidationMap,
     ReactLifeCycleFunctions
   } from 'recompose'
 
@@ -26,11 +27,16 @@ declare module 'recompose' {
     spec: ReactLifeCycleFunctions<TProps, TState, TInstance> & TInstance
   ): InferableComponentEnhancerWithProps<TProps, TProps>
 
-  export function compose<OProps, I1, I2, IProps>(
+  export function compose<OProps, I1, I2, I3, IProps>(
     f1: InferableComponentEnhancerWithProps<I1, OProps>,
     f2: InferableComponentEnhancerWithProps<I2, I1>,
-    f4: InferableComponentEnhancerWithProps<IProps, I2>
+    f3: InferableComponentEnhancerWithProps<I3, I2>,
+    f4: InferableComponentEnhancerWithProps<IProps, I3>
   ): ComponentEnhancer<IProps, OProps>
+
+  export function getContext<TOutter, TContext>(
+    contextTypes: ValidationMap<TContext>
+  ): InferableComponentEnhancerWithProps<TOutter & TContext, TOutter>
 }
 
 declare module 'recompact/withState' {
@@ -51,4 +57,9 @@ declare module 'recompact/lifecycle' {
 declare module 'recompact/compose' {
   import { compose } from 'recompose'
   export default compose
+}
+
+declare module 'recompact/getContext' {
+  import { getContext } from 'recompose'
+  export default getContext
 }
