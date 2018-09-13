@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
-import { RecompactExample } from './RecompactExample'
+import { RecompactExample, PropExample } from './RecompactExample'
 import Example from './Example'
 import { IntlProvider } from 'react-intl'
 
@@ -15,6 +15,7 @@ class App extends Component<Props> {
         <>
           <Example />
           <RecompactExample name="hello world" />
+          <PropExample name="2" />
         </>
       </IntlProvider>
     )

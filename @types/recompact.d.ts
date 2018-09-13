@@ -6,73 +6,67 @@ declare module 'recompact' {
     ComponentEnhancer,
     InferableComponentEnhancerWithProps,
     ReactLifeCycleFunctions,
-    mapper
+    mapper,
+    HandleCreators,
+    HandleCreatorsFactory
   } from 'recompose'
   import { ValidationMap } from 'react'
 
-  export function withState<
-    TOutter,
-    TState,
-    TStateName extends string,
-    TStateUpdaterName extends string
-  >(
-    stateName: TStateName,
-    stateUpdaterName: TStateUpdaterName,
-    initialState: TState | mapper<TOutter, TState>
-  ): InferableComponentEnhancerWithProps<
-    TOutter & stateProps<TState, TStateName, TStateUpdaterName>,
-    TOutter
-  >
-
-  export function lifecycle<TProps, TState, TInstance = {}>(
-    spec: ReactLifeCycleFunctions<TProps, TState, TInstance> & TInstance
-  ): InferableComponentEnhancerWithProps<TProps, TProps>
-
   export function compose<OProps, I1, I2, IProps>(
     f1: InferableComponentEnhancerWithProps<I1, OProps>,
-    f2: InferableComponentEnhancerWithProps<I2, I1>,
-    f4: InferableComponentEnhancerWithProps<IProps, I2>
-  ): ComponentEnhancer<IProps, OProps>
+    f2: InferableComponentEnhancerWithProps<I2, I1 & OProps>,
+    f4: InferableComponentEnhancerWithProps<IProps, I2 & I1 & OProps>
+  ): ComponentEnhancer<IProps & I2 & I1 & OProps, OProps>
 
   export function compose<OProps, I1, I2, I3, IProps>(
     f1: InferableComponentEnhancerWithProps<I1, OProps>,
-    f2: InferableComponentEnhancerWithProps<I2, I1>,
-    f3: InferableComponentEnhancerWithProps<I3, I2>,
-    f4: InferableComponentEnhancerWithProps<IProps, I3>
-  ): ComponentEnhancer<IProps, OProps>
+    f2: InferableComponentEnhancerWithProps<I2, I1 & OProps>,
+    f3: InferableComponentEnhancerWithProps<I3, I2 & I1 & OProps>,
+    f4: InferableComponentEnhancerWithProps<IProps, I3 & I2 & I1 & OProps>
+  ): ComponentEnhancer<IProps & I3 & I2 & I1 & OProps, OProps>
 
   export function compose<OProps, I1, I2, I3, I4, IProps>(
     f1: InferableComponentEnhancerWithProps<I1, OProps>,
-    f2: InferableComponentEnhancerWithProps<I2, I1>,
-    f3: InferableComponentEnhancerWithProps<I3, I2>,
-    f3: InferableComponentEnhancerWithProps<I4, I3>,
-    f4: InferableComponentEnhancerWithProps<IProps, I4>
-  ): ComponentEnhancer<IProps, OProps>
+    f2: InferableComponentEnhancerWithProps<I2, I1 & OProps>,
+    f3: InferableComponentEnhancerWithProps<I3, I2 & I1 & OProps>,
+    f3: InferableComponentEnhancerWithProps<I4, I3 & I2 & I1 & OProps>,
+    f4: InferableComponentEnhancerWithProps<IProps, I4 & I3 & I2 & I1 & OProps>
+  ): ComponentEnhancer<IProps & I4 & I3 & I2 & I1 & OProps, OProps>
+
+  export function lifecycle<TProps, TState, TInstance = {}>(
+    spec: ReactLifeCycleFunctions<TProps, TState, TInstance> & TInstance
+  ): InferableComponentEnhancerWithProps<{}, TProps>
 
   export function getContext<TOutter, TContext>(
     contextTypes: ValidationMap<TContext>
-  ): InferableComponentEnhancerWithProps<TOutter & TContext, TOutter>
+  ): InferableComponentEnhancerWithProps<TContext, TOutter>
 
   export function defaultProps<TOutter, TDefault = {}>(
     props: TDefault
-  ): InferableComponentEnhancerWithProps<TOutter & Required<TDefault>, TOutter>
+  ): InferableComponentEnhancerWithProps<Required<TDefault>, TOutter>
 
   export function withProps<TOutter, TProps>(
     createProps: TProps | mapper<TOutter, TProps>
-  ): InferableComponentEnhancerWithProps<TProps & TOutter, TOutter>
+  ): InferableComponentEnhancerWithProps<TProps, TOutter>
 
   export function onlyUpdateForKeys<T>(
     propKeys: Array<keyof T>
-  ): InferableComponentEnhancerWithProps<T, T>
+  ): InferableComponentEnhancerWithProps<{}, T>
+
+  export function withHandlers<TOutter, THandlers>(
+    handlerCreators:
+      | HandleCreators<TOutter, THandlers>
+      | HandleCreatorsFactory<TOutter, THandlers>
+  ): InferableComponentEnhancerWithProps<THandlers, TOutter>
 }
 
 declare module 'recompact/withState' {
-  import { withState } from 'recompact'
+  import { withState } from 'recompose'
   export default withState
 }
 
 declare module 'recompact/withHandlers' {
-  import { withHandlers } from 'recompose'
+  import { withHandlers } from 'recompact'
   export default withHandlers
 }
 

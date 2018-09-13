@@ -4,6 +4,8 @@ import withState from 'recompact/withState'
 import withHandlers from 'recompact/withHandlers'
 import lifecycle from 'recompact/lifecycle'
 import defaultProps from 'recompact/defaultProps'
+import withProps from 'recompact/withProps'
+import onlyUpdateForKeys from 'recompact/onlyUpdateForKeys'
 import pure from 'recompact/pure'
 import { InferableComponentEnhancerWithProps } from 'recompose'
 
@@ -40,32 +42,60 @@ type HandlerProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
+// export interface Example<Props> {
+//   <P extends Props>(component: P): Props
+// }
+
+// const p: Example<{ message: 5, name: "123" }>;// = ({name: "3"}) => ({ message: 5, name: "123" })
+// p()
+export const defaultPropsExample = (props: {
+  name: string
+  message: string
+  setMessage: (state: string) => string
+}) => {
+  return <div>{props.message}</div>
+}
+const p2 = withState<{ name: string }, string, 'message', 'setMessage'>(
+  'message',
+  'setMessage',
+  ''
+)
+// type p = InferableComponentEnhancerWithProps<{ message: string }, { count: number }>
+type WithProps = { add: number }
+export const PropExample = p2(defaultPropsExample)
 export const RecompactExample = compose<
-  InputProps & DefaultProps, // input props from outside of component, aka interface props
-  InputProps & Required<DefaultProps>, // after defaultProps
-  InputProps & StateProps & Required<DefaultProps>, // after withState
-  Props, // after withHandlers
-  Props, // after lifecycle, lifecycle doesn't change anything, this is types which will go to the inner component
-  Props
->(
-  defaultProps<InputProps, DefaultProps>({
+  InputProps, // input props from outside of component, aka interface props
+  WithProps,
+  Required<DefaultProps>, // after defaultProps
+  StateProps, // after withState
+  HandlerProps,
+  {}
+>( // after withHandlers
+  // Props, // after lifecycle, lifecycle doesn't change anything, this is types which will go to the inner component
+  // Props
+  withProps<InputProps, WithProps>({ add: 3 }),
+  defaultProps<InputProps & WithProps, DefaultProps>({
     defaultMessage: 'something 2'
   }),
   withState<
-    InputProps & Required<DefaultProps>,
+    InputProps & Required<DefaultProps> & WithProps,
     string,
     'message',
     'setMessage'
   >('message', 'setMessage', ''),
-  withHandlers<InputProps & StateProps & Required<DefaultProps>, HandlerProps>({
+  withHandlers<
+    InputProps & StateProps & Required<DefaultProps> & WithProps,
+    HandlerProps
+  >({
     handleClick: props => _ => {
       props.setMessage(props.message ? '' : "You've clicked me!")
     }
   }),
-  lifecycle<Props, {}>({
+  // onlyUpdateForKeys<Props>(['message']),
+  lifecycle<Props & WithProps, {}>({
     componentDidMount() {
       console.log(`mounted ${this.props.defaultMessage}`)
     }
-  }),
-  pure as InferableComponentEnhancerWithProps<Props, Props>
+  })
+  // pure as InferableComponentEnhancerWithProps<Props, Props>
 )(Component)
