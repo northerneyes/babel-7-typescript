@@ -8,6 +8,7 @@ import withProps from 'recompact/withProps'
 import withPropsOnChange from 'recompact/withPropsOnChange'
 import branch from 'recompact/branch'
 import renderNothing from 'recompact/renderNothing'
+import pure from 'recompact/pure'
 // import onlyUpdateForKeys from 'withPropsOnChange/onlyUpdateForKeys'
 // import pure from 'recompact/pure'
 import InferableComponentEnhancerWithProps from 'recompact/InferableComponentEnhancerWithProps'
@@ -77,16 +78,16 @@ type WithProps = { add: number }
 export const PropExample = p2(defaultPropsExample)
 export const RecompactExample = compose<
   InputProps,
-  {}, // input props from outside of component, aka interface props
   WithProps,
   Required<DefaultProps>, // after defaultProps
   StateProps, // after withState
   HandlerProps,
+  {},
+  {},
   {}
 >( // after withHandlers
   // Props, // after lifecycle, lifecycle doesn't change anything, this is types which will go to the inner component
   // Props
-  branch<InputProps>(props => props.name === '2', renderNothing),
   withPropsOnChange<InputProps, WithProps>(['name'], _ => ({ add: 3 })),
   defaultProps<InputProps & WithProps, DefaultProps>({
     defaultMessage: 'something 2'
@@ -102,14 +103,18 @@ export const RecompactExample = compose<
     HandlerProps
   >({
     handleClick: props => _ => {
-      props.setMessage(props.message ? '' : "You've clicked me!")
+      props.setMessage(props.message ? '' : 'click')
     }
   }),
+  branch<Props>(
+    props => props.message === 'click',
+    renderNothing as InferableComponentEnhancerWithProps<{}, Props>
+  ),
   // onlyUpdateForKeys<Props>(['message']),
   lifecycle<Props, {}>({
     componentDidMount() {
       console.log(`mounted ${this.props.defaultMessage}`)
     }
-  })
-  // pure as InferableComponentEnhancerWithProps<Props, Props>
+  }),
+  pure as InferableComponentEnhancerWithProps<{}, Props>
 )(Component)

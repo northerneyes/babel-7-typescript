@@ -12,7 +12,7 @@ declare module 'recompact' {
     predicateDiff,
     predicate
   } from 'recompose'
-  import { ValidationMap } from 'react'
+  import { ComponentType as Component, ValidationMap } from 'react'
 
   export function compose<OProps, I1, I2>(
     f1: InferableComponentEnhancerWithProps<I1, OProps>,
