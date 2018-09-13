@@ -27,6 +27,9 @@
         "name": "tslint-language-service",
         "ignoreDefinitionFiles": true,
         "configFile": "./tslint.json"
+      },
+      {
+        "name": "typescript-styled-plugin"
       }
     ]
   },
