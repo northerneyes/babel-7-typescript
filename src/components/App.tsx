@@ -14,7 +14,7 @@ class App extends Component<Props> {
       <IntlProvider locale="en">
         <>
           <Example />
-          <RecompactExample name="hello world" />
+          <RecompactExample name="20" />
           <PropExample name="2" />
         </>
       </IntlProvider>

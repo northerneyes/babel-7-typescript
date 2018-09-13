@@ -5,9 +5,12 @@ import withHandlers from 'recompact/withHandlers'
 import lifecycle from 'recompact/lifecycle'
 import defaultProps from 'recompact/defaultProps'
 import withProps from 'recompact/withProps'
-import onlyUpdateForKeys from 'recompact/onlyUpdateForKeys'
-import pure from 'recompact/pure'
-import { InferableComponentEnhancerWithProps } from 'recompose'
+import withPropsOnChange from 'recompact/withPropsOnChange'
+import branch from 'recompact/branch'
+import renderNothing from 'recompact/renderNothing'
+// import onlyUpdateForKeys from 'withPropsOnChange/onlyUpdateForKeys'
+// import pure from 'recompact/pure'
+import InferableComponentEnhancerWithProps from 'recompact/InferableComponentEnhancerWithProps'
 
 type InputProps = {
   name: string
@@ -17,7 +20,11 @@ type DefaultProps = {
   defaultMessage?: string
 }
 
-type Props = StateProps & HandlerProps & InputProps & Required<DefaultProps>
+type Props = StateProps &
+  HandlerProps &
+  InputProps &
+  Required<DefaultProps> &
+  WithProps
 
 export const Component = (props: Props) => {
   return (
@@ -48,6 +55,11 @@ type HandlerProps = {
 
 // const p: Example<{ message: 5, name: "123" }>;// = ({name: "3"}) => ({ message: 5, name: "123" })
 // p()
+
+export const Loading = (props: InputProps) => {
+  return <div>Loading</div>
+}
+
 export const defaultPropsExample = (props: {
   name: string
   message: string
@@ -60,11 +72,12 @@ const p2 = withState<{ name: string }, string, 'message', 'setMessage'>(
   'setMessage',
   ''
 )
-// type p = InferableComponentEnhancerWithProps<{ message: string }, { count: number }>
+
 type WithProps = { add: number }
 export const PropExample = p2(defaultPropsExample)
 export const RecompactExample = compose<
-  InputProps, // input props from outside of component, aka interface props
+  InputProps,
+  {}, // input props from outside of component, aka interface props
   WithProps,
   Required<DefaultProps>, // after defaultProps
   StateProps, // after withState
@@ -73,7 +86,8 @@ export const RecompactExample = compose<
 >( // after withHandlers
   // Props, // after lifecycle, lifecycle doesn't change anything, this is types which will go to the inner component
   // Props
-  withProps<InputProps, WithProps>({ add: 3 }),
+  branch<InputProps>(props => props.name === '2', renderNothing),
+  withPropsOnChange<InputProps, WithProps>(['name'], _ => ({ add: 3 })),
   defaultProps<InputProps & WithProps, DefaultProps>({
     defaultMessage: 'something 2'
   }),
@@ -92,7 +106,7 @@ export const RecompactExample = compose<
     }
   }),
   // onlyUpdateForKeys<Props>(['message']),
-  lifecycle<Props & WithProps, {}>({
+  lifecycle<Props, {}>({
     componentDidMount() {
       console.log(`mounted ${this.props.defaultMessage}`)
     }

@@ -21,6 +21,7 @@
     "pretty": true,
     "skipLibCheck": true,
     "sourceMap": true,
+    "noErrorTruncation": true,
     "plugins": [
       {
         "name": "tslint-language-service",
