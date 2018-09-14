@@ -1,25 +1,34 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { hot } from 'react-hot-loader'
 import { RecompactExample, PropExample } from './RecompactExample'
 import { StyledExample } from './StyledExample'
 import Example from './Example'
 import { IntlProvider } from 'react-intl'
+import './reselect'
+import { createStore } from '../redux/store'
+import { Provider } from 'react-redux'
+import { CounterExample } from './CounterExample'
 
 interface Props {
   name: string
 }
 
-class App extends Component<Props> {
+const store = createStore({})
+
+class App extends React.Component<Props> {
   render() {
     return (
-      <IntlProvider locale="en">
-        <>
-          <Example />
-          <RecompactExample name="20" />
-          <PropExample name="2" />
-          <StyledExample name="some name" />
-        </>
-      </IntlProvider>
+      <Provider store={store}>
+        <IntlProvider locale="en">
+          <>
+            <Example />
+            <RecompactExample name="20" />
+            <PropExample name="2" />
+            <CounterExample name="counter" />
+            <StyledExample name="some name" />
+          </>
+        </IntlProvider>
+      </Provider>
     )
   }
 }

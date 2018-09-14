@@ -27,13 +27,19 @@ type AProps = {
   count: number
 }
 
-function AnotherComponent(props: AProps) {
+const AnotherComponent: React.SFC<AProps> = props => {
   return <div className={props.className}>Another components</div>
 }
 
 const StyledAnotherComponent = styled(AnotherComponent)`
   color: green;
 `
+
+export const someFunction = (name: string, city: string, goal: string) => {
+  return name + city + goal
+}
+
+type P = ReturnType<typeof someFunction>
 
 export function StyledExample(props: Props) {
   return (
