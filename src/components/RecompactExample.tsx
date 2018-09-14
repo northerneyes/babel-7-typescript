@@ -4,7 +4,7 @@ import withState from 'recompact/withState'
 import withHandlers from 'recompact/withHandlers'
 import lifecycle from 'recompact/lifecycle'
 import defaultProps from 'recompact/defaultProps'
-import withProps from 'recompact/withProps'
+// import withProps from 'recompact/withProps'
 import withPropsOnChange from 'recompact/withPropsOnChange'
 import branch from 'recompact/branch'
 import renderNothing from 'recompact/renderNothing'
@@ -57,7 +57,7 @@ type HandlerProps = {
 // const p: Example<{ message: 5, name: "123" }>;// = ({name: "3"}) => ({ message: 5, name: "123" })
 // p()
 
-export const Loading = (props: InputProps) => {
+export const Loading = (_: InputProps) => {
   return <div>Loading</div>
 }
 

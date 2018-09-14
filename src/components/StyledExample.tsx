@@ -39,7 +39,7 @@ export const someFunction = (name: string, city: string, goal: string) => {
   return name + city + goal
 }
 
-type P = ReturnType<typeof someFunction>
+// type P = ReturnType<typeof someFunction>
 
 export function StyledExample(props: Props) {
   return (
