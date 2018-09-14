@@ -1,5 +1,6 @@
 import { action, ActionType } from 'typesafe-actions'
 import { Reducer } from 'redux'
+import { update } from '../utils'
 
 export enum CounterActionTypes {
   INCREMENT = '@@counter/INCREMENT',
@@ -30,13 +31,13 @@ const reducer: Reducer<CounterState, CounterAction> = (
 ) => {
   switch (action.type) {
     case CounterActionTypes.INCREMENT: {
-      return { ...state, count: state.count + 1 }
+      return update(state, { count: state.count + 1 })
     }
     case CounterActionTypes.DECREMENT: {
-      return { ...state, count: state.count - 1 }
+      return update(state, { count: state.count - 1 })
     }
     case CounterActionTypes.INCREMENT2: {
-      return { ...state, count: state.count - action.payload }
+      return update(state, { count: state.count - action.payload })
     }
     default: {
       return state
