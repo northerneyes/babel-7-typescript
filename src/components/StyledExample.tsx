@@ -41,7 +41,7 @@ export const someFunction = (name: string, city: string, goal: string) => {
 
 // type P = ReturnType<typeof someFunction>
 
-export function StyledExample(props: Props) {
+export const StyledExample: React.SFC<Props> = props => {
   return (
     <Container>
       <Quote color="red">Some text</Quote>

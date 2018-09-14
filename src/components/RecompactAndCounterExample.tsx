@@ -1,7 +1,10 @@
 import React from 'react'
+import compose from 'recompact/compose'
+import withPropsOnChange from 'recompact/withPropsOnChange'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../redux/reducers'
 import { increment, decrement } from '../redux/counter/counter'
+import InferableComponentEnhancerWithProps from 'recompact/InferableComponentEnhancerWithProps'
 
 type Props = {
   name: string
@@ -17,7 +20,9 @@ type DispatchProps = {
   decrement: typeof decrement
 }
 
-class Component extends React.Component<StateProps & Props & DispatchProps> {
+class Component extends React.Component<
+  StateProps & Props & DispatchProps & WithProps
+> {
   private handleIncrement = () => {
     this.props.increment()
   }
@@ -31,6 +36,7 @@ class Component extends React.Component<StateProps & Props & DispatchProps> {
   render() {
     return (
       <>
+        <div>add value: {this.props.add}</div>
         <div>value: {this.props.value}</div>
         <div>prev value: {this.props.prevValue}</div>
         <button onClick={this.handleIncrement}>Increment</button>
@@ -40,17 +46,24 @@ class Component extends React.Component<StateProps & Props & DispatchProps> {
   }
 }
 
-export const CounterExample = connect<
-  StateProps,
-  DispatchProps,
+type WithProps = { add: number }
+
+export const RecompactAndCounterExample = compose<
   Props,
-  ApplicationState
+  StateProps & DispatchProps,
+  WithProps
 >(
-  state => {
-    return {
-      value: state.counter.count,
-      prevValue: state.counter.prev.count
-    }
-  },
-  { increment, decrement }
+  connect<StateProps, DispatchProps, Props, ApplicationState>(
+    state => {
+      return {
+        value: state.counter.count,
+        prevValue: state.counter.prev.count
+      }
+    },
+    { increment, decrement }
+  ) as InferableComponentEnhancerWithProps<StateProps & DispatchProps, Props>,
+  withPropsOnChange<Props & StateProps & DispatchProps, WithProps>(
+    ['name'],
+    _ => ({ add: 3 })
+  )
 )(Component)

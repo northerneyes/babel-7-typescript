@@ -29,7 +29,7 @@ type Props = StateProps &
 
 export const Component: React.SFC<Props> = props => {
   return (
-    <div>
+    <>
       {props.name} But hrm doesn't work because of using recompact
       <br />
       <div>
@@ -37,7 +37,7 @@ export const Component: React.SFC<Props> = props => {
       </div>
       <div>{props.message}</div>
       <div>{props.defaultMessage}</div>
-    </div>
+    </>
   )
 }
 

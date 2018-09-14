@@ -1,3 +1,3 @@
-import * as some from './StyledExample'
+import { increment } from '../redux/counter/counter'
 
-console.log(some.someFunction('2', '3', '3'))
+console.log(increment())
