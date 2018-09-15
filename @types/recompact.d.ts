@@ -1,5 +1,3 @@
-///<reference types="recompose" />
-
 declare module 'recompact' {
   import {
     stateProps,

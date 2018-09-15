@@ -1,8 +1,8 @@
 declare module 'utility-types' {
+  export * from 'utility-types/dist/mapped-types'
   // implementation of DeepReadonly from https://github.com/piotrwitek/utility-types/blob/master/src/mapped-types.ts#L121
   // with a fix regarding _DeepReadonlyObject using Pick and keyof in _DeepReadonlyObject
   // or simply https://github.com/piotrwitek/utility-types/pull/28
-
   /**
    * DeepReadonly
    * @desc Readonly that works for deeply nested structure

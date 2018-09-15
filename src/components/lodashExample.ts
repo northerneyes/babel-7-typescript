@@ -27,6 +27,8 @@ const filtered = filter(map(items, item => item.category), p => Boolean(p))
 
 const category = get(items, 0, 'category', 'name')
 
+// const notNull = <T>(p: T) => p as NonNullable<T>
+
 console.log('map category: ', mapped)
 console.log('map and filter by category: ', filtered)
 console.log('get category: ', category)
