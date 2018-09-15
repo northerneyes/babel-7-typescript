@@ -1,6 +1,6 @@
 import map from 'lodash/map'
 import filter from 'lodash/filter'
-import { get } from './typesafe-get'
+import { get } from '@get'
 
 type Item = {
   id: number

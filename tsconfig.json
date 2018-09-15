@@ -11,7 +11,7 @@
     "strictPropertyInitialization": true,
 
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
+    "baseUrl": "",
     "rootDir": "./",
     "jsx": "react",
     "module": "es2015",
@@ -22,6 +22,9 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "noErrorTruncation": true,
+    "paths": {
+      "@get": ["src/components/typesafe-get"]
+    },
     "plugins": [
       {
         "name": "tslint-language-service",

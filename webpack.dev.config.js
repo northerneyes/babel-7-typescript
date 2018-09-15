@@ -89,6 +89,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    modules: ['node_modules', 'bower_components']
+    modules: ['node_modules', 'bower_components'],
+    alias: {
+      '@get': path.join(constants.SRC_DIR, 'components/typesafe-get.ts')
+    }
   }
 }
