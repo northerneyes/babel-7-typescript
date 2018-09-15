@@ -11,8 +11,6 @@ export function update<T extends object, K extends keyof T>(
   return result
 }
 
-export type DeepReadonly<T> = { readonly [K in keyof T]: DeepReadonly<T[K]> }
-
 export function assertNever<T>(_: never, state: T): T {
   return state
 }

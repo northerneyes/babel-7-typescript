@@ -1,6 +1,7 @@
 import { action, ActionType } from 'typesafe-actions'
 import { Reducer } from 'redux'
-import { update, DeepReadonly, assertNever } from '../utils'
+import { update, assertNever } from '../utils'
+import { DeepReadonly } from 'utility-types'
 
 export enum CounterActionTypes {
   INCREMENT = '@@counter/INCREMENT',

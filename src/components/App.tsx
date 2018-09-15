@@ -10,6 +10,7 @@ import { createStore } from '../redux/store'
 import { Provider } from 'react-redux'
 import { CounterExample } from './CounterExample'
 import { RecompactAndCounterExample } from './RecompactAndCounterExample'
+import './lodashExample'
 
 interface Props {
   name: string
