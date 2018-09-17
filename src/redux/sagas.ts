@@ -3,7 +3,7 @@ import { all, select, call, put, takeLatest } from 'redux-saga/effects'
 import { PromiseType } from 'utility-types'
 import { CounterActionTypes, increment } from './counter/counter'
 import { ApplicationState } from './reducers'
-import * as Promise from 'bluebird'
+// import * as Promise from 'bluebird'
 
 function fetch(value: number) {
   const promise = new Promise<number>((resolve, reject) => {
@@ -20,7 +20,7 @@ export function* incrementAsync() {
   const selector = (state: ApplicationState) => state.counter.count
   const counterValue: ReturnType<typeof selector> = yield select(selector)
   console.log('counterValue', counterValue)
-  const value: PromiseType<ReturnType<typeof fetch>> = yield call(fetch, 50)
+  const value: PromiseType<ReturnType<typeof fetch>> = yield call(fetch, 4)
   console.log('fetch', value)
   yield delay(50)
   yield put(increment())
