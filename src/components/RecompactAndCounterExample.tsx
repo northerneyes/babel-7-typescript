@@ -48,11 +48,7 @@ class Component extends React.Component<
 
 type WithProps = { add: number }
 
-export const RecompactAndCounterExample = compose<
-  Props,
-  StateProps & DispatchProps,
-  WithProps
->(
+export const RecompactAndCounterExample = compose(
   connect<StateProps, DispatchProps, Props, ApplicationState>(
     state => {
       return {

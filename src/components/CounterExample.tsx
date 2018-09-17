@@ -40,13 +40,8 @@ class Component extends React.Component<StateProps & Props & DispatchProps> {
   }
 }
 
-export const CounterExample = connect<
-  StateProps,
-  DispatchProps,
-  Props,
-  ApplicationState
->(
-  state => {
+export const CounterExample = connect(
+  (state: ApplicationState) => {
     return {
       value: state.counter.count,
       prevValue: state.counter.prev.count

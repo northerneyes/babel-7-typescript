@@ -76,16 +76,8 @@ const p2 = withState<{ name: string }, string, 'message', 'setMessage'>(
 
 type WithProps = { add: number }
 export const PropExample = p2(defaultPropsExample)
-export const RecompactExample = compose<
-  InputProps,
-  WithProps,
-  Required<DefaultProps>, // after defaultProps
-  StateProps, // after withState
-  HandlerProps,
-  {},
-  {},
-  {}
->( // after withHandlers
+export const RecompactExample = compose(
+  // after withHandlers
   // Props, // after lifecycle, lifecycle doesn't change anything, this is types which will go to the inner component
   // Props
   withPropsOnChange<InputProps, WithProps>(['name'], _ => ({ add: 3 })),
