@@ -5,7 +5,8 @@ import { DeepReadonly } from 'utility-types'
 
 export enum CounterActionTypes {
   INCREMENT = '@@counter/INCREMENT',
-  DECREMENT = '@@counter/DECREMENT'
+  DECREMENT = '@@counter/DECREMENT',
+  INCREMENT_ASYNC = '@@counter/INCREMENT_ASYNC'
 }
 
 type Item = {
@@ -22,6 +23,7 @@ export type CounterState = DeepReadonly<{
 }>
 
 export const increment = () => action(CounterActionTypes.INCREMENT)
+export const incrementAsync = () => action(CounterActionTypes.INCREMENT_ASYNC)
 export const decrement = () => action(CounterActionTypes.DECREMENT)
 
 export const actions = { increment, decrement }
