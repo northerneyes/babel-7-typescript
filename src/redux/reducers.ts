@@ -1,14 +1,10 @@
 import { combineReducers } from 'redux'
-import { ActionType } from 'typesafe-actions'
-import { CounterState, counterReducer, actions } from './counter/counter'
-
-const allActions = { ...actions }
-export type AllActions = ActionType<typeof allActions>
+import { CounterState, counterReducer } from './counter/counter'
 
 export interface ApplicationState {
   counter: CounterState
 }
 
-export const rootReducer = combineReducers<ApplicationState, AllActions>({
+export const rootReducer = combineReducers<ApplicationState>({
   counter: counterReducer
 })

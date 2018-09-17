@@ -5,18 +5,19 @@ import {
   createStore as reduxCreateStore
 } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { ApplicationState, rootReducer, AllActions } from './reducers'
+import { ApplicationState, rootReducer } from './reducers'
 import rootSaga from './sagas'
+import logger from './logger'
 
 const sagaMiddleware = createSagaMiddleware()
 
 export const createStore = (
   initialState: DeepPartial<ApplicationState>
-): Store<ApplicationState, AllActions> => {
+): Store<ApplicationState> => {
   const store = reduxCreateStore(
     rootReducer,
     initialState,
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware, logger)
   )
   sagaMiddleware.run(rootSaga)
   return store

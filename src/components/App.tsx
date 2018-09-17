@@ -4,7 +4,6 @@ import { RecompactExample, PropExample } from './RecompactExample'
 import { StyledExample } from './StyledExample'
 import Example from './Example'
 import { IntlProvider } from 'react-intl'
-import { AllActions } from '../redux/reducers'
 import './reselect'
 import { createStore } from '../redux/store'
 import { Provider } from 'react-redux'
@@ -21,7 +20,7 @@ const store = createStore({})
 class App extends React.Component<Props> {
   render() {
     return (
-      <Provider<AllActions> store={store}>
+      <Provider store={store}>
         <IntlProvider locale="en">
           <>
             <Example />

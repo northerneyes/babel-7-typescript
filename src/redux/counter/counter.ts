@@ -6,7 +6,7 @@ import { DeepReadonly } from 'utility-types'
 export enum CounterActionTypes {
   INCREMENT = '@@counter/INCREMENT',
   DECREMENT = '@@counter/DECREMENT',
-  INCREMENT_ASYNC = '@@counter/INCREMENT_ASYNC'
+  INCREMENT_ASYNC = '@@counter-saga/INCREMENT_ASYNC'
 }
 
 type Item = {

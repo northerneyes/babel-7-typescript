@@ -3,7 +3,6 @@ import { all, select, call, put, takeLatest } from 'redux-saga/effects'
 import { PromiseType } from 'utility-types'
 import { CounterActionTypes, increment } from './counter/counter'
 import { ApplicationState } from './reducers'
-// import * as Promise from 'bluebird'
 
 function fetch(value: number) {
   const promise = new Promise<number>((resolve, reject) => {
@@ -17,8 +16,10 @@ function fetch(value: number) {
 }
 
 export function* incrementAsync() {
-  const selector = (state: ApplicationState) => state.counter.count
-  const counterValue: ReturnType<typeof selector> = yield select(selector)
+  const countSelector = (state: ApplicationState) => state.counter.count
+  const counterValue: ReturnType<typeof countSelector> = yield select(
+    countSelector
+  )
   console.log('counterValue', counterValue)
   const value: PromiseType<ReturnType<typeof fetch>> = yield call(fetch, 4)
   console.log('fetch', value)
