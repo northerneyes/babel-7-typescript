@@ -4,13 +4,10 @@ import withState from 'recompact/withState'
 import withHandlers from 'recompact/withHandlers'
 import lifecycle from 'recompact/lifecycle'
 import defaultProps from 'recompact/defaultProps'
-// import withProps from 'recompact/withProps'
 import withPropsOnChange from 'recompact/withPropsOnChange'
 import branch from 'recompact/branch'
 import renderNothing from 'recompact/renderNothing'
 import pure from 'recompact/pure'
-// import onlyUpdateForKeys from 'withPropsOnChange/onlyUpdateForKeys'
-// import pure from 'recompact/pure'
 import InferableComponentEnhancerWithProps from 'recompact/InferableComponentEnhancerWithProps'
 
 type InputProps = {
@@ -50,13 +47,6 @@ type HandlerProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-// export interface Example<Props> {
-//   <P extends Props>(component: P): Props
-// }
-
-// const p: Example<{ message: 5, name: "123" }>;// = ({name: "3"}) => ({ message: 5, name: "123" })
-// p()
-
 export const Loading = (_: InputProps) => {
   return <div>Loading</div>
 }
@@ -76,10 +66,8 @@ const p2 = withState<{ name: string }, string, 'message', 'setMessage'>(
 
 type WithProps = { add: number }
 export const PropExample = p2(defaultPropsExample)
+
 export const RecompactExample = compose(
-  // after withHandlers
-  // Props, // after lifecycle, lifecycle doesn't change anything, this is types which will go to the inner component
-  // Props
   withPropsOnChange<InputProps, WithProps>(['name'], _ => ({ add: 3 })),
   defaultProps<InputProps & WithProps, DefaultProps>({
     defaultMessage: 'something 2'
@@ -102,7 +90,6 @@ export const RecompactExample = compose(
     props => props.message === 'click',
     renderNothing as InferableComponentEnhancerWithProps<{}, Props>
   ),
-  // onlyUpdateForKeys<Props>(['message']),
   lifecycle<Props, {}>({
     componentDidMount() {
       console.log(`mounted ${this.props.defaultMessage}`)
