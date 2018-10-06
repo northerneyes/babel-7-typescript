@@ -1,4 +1,4 @@
-import { createAction, ActionType, getType } from 'typesafe-actions'
+import { createStandardAction, ActionType, getType } from 'typesafe-actions'
 import { Reducer } from 'redux'
 import { update, assertNever } from '../utils'
 import { DeepReadonly } from 'utility-types'
@@ -21,9 +21,11 @@ const initialState: CounterState = {
   prev: { count: 0 }
 }
 
-export const increment = createAction('@@counter/INCREMENT')
-export const decrement = createAction('@@counter/DECREMENT')
-export const incrementAsync = createAction('@@counter-saga/INCREMENT_ASYNC')
+export const increment = createStandardAction('@@counter/INCREMENT')()
+export const decrement = createStandardAction('@@counter/DECREMENT')()
+export const incrementAsync = createStandardAction(
+  '@@counter-saga/INCREMENT_ASYNC'
+)()
 
 const actionCreators = { increment, decrement }
 export type CounterAction = ActionType<typeof actionCreators>
