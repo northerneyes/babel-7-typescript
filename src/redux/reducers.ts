@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
-import { CounterState, counterReducer } from './counter/counter'
+import { StateType } from 'typesafe-actions'
+import { counterReducer } from './counter/counter'
 
-export interface ApplicationState {
-  counter: CounterState
-}
-
-export const rootReducer = combineReducers<ApplicationState>({
+export const rootReducer = combineReducers({
   counter: counterReducer
 })
+
+export type ApplicationState = StateType<typeof rootReducer>

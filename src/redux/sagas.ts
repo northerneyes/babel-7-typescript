@@ -1,11 +1,8 @@
 import { delay } from 'redux-saga'
 import { all, select, call, put } from 'redux-saga/effects'
+import { ActionType, getType } from 'typesafe-actions'
 import { PromiseType } from 'utility-types'
-import {
-  CounterActionTypes,
-  increment,
-  incrementAsync as incrementAsyncActionCreator
-} from './counter/counter'
+import { increment, incrementAsync } from './counter/counter'
 import { ApplicationState } from './reducers'
 import { takeLatestAction } from './saga.utils'
 
@@ -20,10 +17,9 @@ function fetch(value: number) {
   return promise
 }
 
-type incrementAsyncAction = ReturnType<typeof incrementAsyncActionCreator>
-// type incrementAction = ReturnType<typeof increment>
+type incrementAsyncAction = ActionType<typeof incrementAsync>
 
-export function* incrementAsync(_: incrementAsyncAction) {
+export function* incrementAsyncWorker(_: incrementAsyncAction) {
   const countSelector = (state: ApplicationState) => state.counter.count
   const counterValue: ReturnType<typeof countSelector> = yield select(
     countSelector
@@ -36,7 +32,7 @@ export function* incrementAsync(_: incrementAsyncAction) {
 }
 
 export function* incrementSaga() {
-  yield takeLatestAction(CounterActionTypes.INCREMENT_ASYNC, incrementAsync)
+  yield takeLatestAction(getType(incrementAsync), incrementAsyncWorker)
 }
 
 export default function* rootSaga() {
