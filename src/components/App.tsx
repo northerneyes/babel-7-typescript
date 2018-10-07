@@ -15,7 +15,7 @@ interface Props {
   name: string
 }
 
-const store = createStore({})
+const store = createStore()
 
 class App extends React.Component<Props> {
   render() {

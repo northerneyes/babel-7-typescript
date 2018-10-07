@@ -1,5 +1,4 @@
 import {
-  Store,
   DeepPartial,
   applyMiddleware,
   createStore as reduxCreateStore
@@ -12,8 +11,8 @@ import logger from './logger'
 const sagaMiddleware = createSagaMiddleware()
 
 export const createStore = (
-  initialState: DeepPartial<ApplicationState>
-): Store<ApplicationState> => {
+  initialState: DeepPartial<ApplicationState> = {}
+) => {
   const store = reduxCreateStore(
     rootReducer,
     initialState,
