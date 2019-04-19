@@ -24,7 +24,7 @@ type Props = StateProps &
   Required<DefaultProps> &
   WithProps
 
-export const Component: React.SFC<Props> = props => {
+export const Component: React.FunctionComponent<Props> = props => {
   return (
     <>
       {props.name} But hrm doesn't work because of using recompact
@@ -51,7 +51,7 @@ export const Loading = (_: InputProps) => {
   return <div>Loading</div>
 }
 
-export const defaultPropsExample: React.ComponentType<{
+export const defaultPropsExample: React.FunctionComponent<{
   name: string
   message: string
   setMessage: (state: string) => string
