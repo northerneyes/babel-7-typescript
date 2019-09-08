@@ -100,7 +100,7 @@
     "tslint-config-standard": "^8.0.1",
     "tslint-language-service": "^0.9.9",
     "tslint-react": "^3.6.0",
-    "typescript": "3.5.1",
+    "typescript": "3.6.2",
     "typescript-styled-plugin": "^0.11.0",
     "typestrict": "^1.0.0",
     "webpack": "^4.12.0",
